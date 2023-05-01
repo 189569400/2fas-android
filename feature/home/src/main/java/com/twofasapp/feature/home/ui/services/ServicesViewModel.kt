@@ -25,7 +25,6 @@ internal class ServicesViewModel(
 ) : ViewModel() {
 
     val uiState = MutableStateFlow(ServicesUiState())
-//    val orderList = MutableStateFlow(listOf(1, 2, 3, 4, 5, 6))
 
     private val isInEditMode = MutableStateFlow(false)
     private val searchQuery = MutableStateFlow("")

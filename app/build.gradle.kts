@@ -64,6 +64,7 @@ dependencies {
     implementation(project(":feature:externalimport"))
     implementation(project(":feature:browserext"))
     implementation(project(":feature:appsettings"))
+    implementation(project(":feature:qrscan"))
 
     implementation(libs.bundles.appCompat)
     implementation(libs.bundles.rxJava)

@@ -5,21 +5,18 @@ plugins {
 }
 
 android {
-    namespace = "com.twofasapp.feature.home"
+    namespace = "com.twofasapp.feature.qrscan"
 }
 
 dependencies {
     implementation(project(":core:di"))
-    implementation(project(":data:notifications"))
-    implementation(project(":data:services"))
-    implementation(project(":data:session"))
     implementation(project(":core:common"))
     implementation(project(":core:locale"))
     implementation(project(":core:designsystem"))
-    implementation(project(":backup:domain"))
-    implementation(project(":feature:qrscan"))
 
     implementation(libs.bundles.compose)
     implementation(libs.bundles.viewModel)
     implementation(libs.bundles.accompanist)
+    implementation(libs.bundles.barcodeScanner)
+    implementation(libs.timber)
 }

@@ -156,7 +156,7 @@ private fun ServicesScreen(
     var clickedGroup by remember { mutableStateOf<Group?>(null) }
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState)
-    val modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    val modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
     var modalType by remember { mutableStateOf<ModalType>(ModalType.AddService) }
     val activity = LocalContext.currentActivity
     val scope = rememberCoroutineScope()
@@ -204,7 +204,8 @@ private fun ServicesScreen(
         when (it) {
             ServicesStateEvent.ShowAddServiceModal -> {
                 modalType = ModalType.AddService
-                scope.launch { modalState.show() }
+                askForPermission = true
+
             }
 
             ServicesStateEvent.ShowQrFromGalleryDialog -> {
@@ -600,7 +601,7 @@ private fun ServicesScreen(
             permission = Manifest.permission.CAMERA,
             onGranted = {
                 askForPermission = false
-                listener.openAddQrService(activity)
+                scope.launch { modalState.show() }
             },
             onDismissRequest = { askForPermission = false },
             rationaleTitle = TwLocale.strings.permissionCameraTitle,

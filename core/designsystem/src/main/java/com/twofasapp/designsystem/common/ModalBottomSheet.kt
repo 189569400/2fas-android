@@ -3,6 +3,7 @@ package com.twofasapp.designsystem.common
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -41,7 +42,11 @@ fun ModalBottomSheet(
         modifier = Modifier,
         sheetState = sheetState,
         sheetContent = {
-            Column(Modifier.navigationBarsPadding()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding()
+            ) {
                 SlideHandle(
                     modifier = Modifier
                         .padding(top = 12.dp)

@@ -61,4 +61,6 @@ object TwIcons {
     val ListStyle @Composable get() = painterResource(R.drawable.ic_list_style)
     val IncrementHotp @Composable get() = painterResource(R.drawable.ic_increment_hotp)
     val Screenshot @Composable get() = painterResource(R.drawable.ic_screenshot)
+    val Panorama @Composable get() = painterResource(R.drawable.ic_keyboard)
+    val Keyboard @Composable get() = painterResource(R.drawable.ic_panorama)
 }
