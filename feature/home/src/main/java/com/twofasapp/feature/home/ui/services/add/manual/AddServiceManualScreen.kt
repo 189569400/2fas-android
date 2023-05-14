@@ -273,6 +273,7 @@ internal fun AddServiceManualScreen(
 
         } else {
             TwDivider()
+            Spacer(modifier = Modifier.height(24.dp))
         }
 
         TwButton(

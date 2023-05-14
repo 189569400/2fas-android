@@ -181,4 +181,12 @@ internal class ServicesRepositoryImpl(
     override suspend fun recalculateTimeDelta() {
         recalculateTimeDeltaCase.invoke()
     }
+
+    override suspend fun isServiceExists(secret: String): Boolean {
+        return getServices().map { it.secret.lowercase() }.contains(secret.lowercase())
+    }
+
+    override suspend fun isSecretValid(secret: String): Boolean {
+        return codeGenerator.check(secret)
+    }
 }
