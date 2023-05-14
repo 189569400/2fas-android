@@ -71,7 +71,7 @@ import com.twofasapp.feature.home.ui.services.component.ServicesFab
 import com.twofasapp.feature.home.ui.services.component.ServicesProgress
 import com.twofasapp.feature.home.ui.services.component.SyncNoticeBar
 import com.twofasapp.feature.home.ui.services.component.SyncReminder
-import com.twofasapp.feature.home.ui.services.modal.AddServiceModal
+import com.twofasapp.feature.home.ui.services.add.AddServiceModal
 import com.twofasapp.feature.home.ui.services.modal.FocusServiceModal
 import com.twofasapp.feature.home.ui.services.modal.ModalType
 import com.twofasapp.locale.TwLocale

@@ -1,5 +1,6 @@
 package com.twofasapp.designsystem.common
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,13 +40,14 @@ fun ModalBottomSheet(
         }
     }
     ModalBottomSheetLayout(
-        modifier = Modifier,
+        modifier = Modifier.animateContentSize(),
         sheetState = sheetState,
         sheetContent = {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
+                    .animateContentSize()
             ) {
                 SlideHandle(
                     modifier = Modifier
