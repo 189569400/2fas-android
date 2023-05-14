@@ -172,7 +172,6 @@ internal class ServiceViewModel(
                 updateService { service -> service.copy(authType = authType, otp = service.otp.copy(algorithm = Service.Algorithm.SHA1)) }
             }
         }
-
     }
 
     fun updateAlgorithm(algorithm: Service.Algorithm) {

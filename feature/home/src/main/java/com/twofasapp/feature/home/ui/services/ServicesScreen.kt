@@ -8,6 +8,7 @@ import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -66,12 +67,12 @@ import com.twofasapp.feature.home.R
 import com.twofasapp.feature.home.navigation.HomeNavigationListener
 import com.twofasapp.feature.home.ui.bottombar.BottomBar
 import com.twofasapp.feature.home.ui.bottombar.BottomBarListener
+import com.twofasapp.feature.home.ui.services.add.AddServiceModal
 import com.twofasapp.feature.home.ui.services.component.ServicesAppBar
 import com.twofasapp.feature.home.ui.services.component.ServicesFab
 import com.twofasapp.feature.home.ui.services.component.ServicesProgress
 import com.twofasapp.feature.home.ui.services.component.SyncNoticeBar
 import com.twofasapp.feature.home.ui.services.component.SyncReminder
-import com.twofasapp.feature.home.ui.services.add.AddServiceModal
 import com.twofasapp.feature.home.ui.services.modal.FocusServiceModal
 import com.twofasapp.feature.home.ui.services.modal.ModalType
 import com.twofasapp.locale.TwLocale
@@ -156,8 +157,8 @@ private fun ServicesScreen(
     var clickedGroup by remember { mutableStateOf<Group?>(null) }
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState)
-    val modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
-    var modalType by remember { mutableStateOf<ModalType>(ModalType.AddService) }
+    val modalState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
+    var modalType by remember { mutableStateOf<ModalType>(ModalType.Empty) }
     val activity = LocalContext.currentActivity
     val scope = rememberCoroutineScope()
 
@@ -275,10 +276,16 @@ private fun ServicesScreen(
                     }
                 }
             }
+
+            modalType = ModalType.Empty
         },
         sheetState = modalState,
         sheetContent = {
             when (modalType) {
+                is ModalType.Empty -> {
+                    Box(modifier = Modifier.fillMaxWidth())
+                }
+
                 is ModalType.AddService ->
                     AddServiceModal(
                         onAddManuallyClick = {
