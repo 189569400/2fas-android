@@ -2,7 +2,7 @@ package com.twofasapp.parsers
 
 import com.twofasapp.di.BackupSyncStatus
 import com.twofasapp.parsers.domain.SupportedService
-import com.twofasapp.prefs.model.OtpAuthLink
+import com.twofasapp.parsers.domain.OtpAuthLink
 import com.twofasapp.prefs.model.ServiceDto
 import com.twofasapp.prefs.model.Tint
 

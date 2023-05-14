@@ -1,11 +1,11 @@
 package com.twofasapp.parsers.legacy
 
 import com.twofasapp.di.BackupSyncStatus
-import com.twofasapp.prefs.model.OtpAuthLink
-import com.twofasapp.prefs.model.OtpAuthLink.Companion.ALGORITHM_PARAM
-import com.twofasapp.prefs.model.OtpAuthLink.Companion.COUNTER
-import com.twofasapp.prefs.model.OtpAuthLink.Companion.DIGITS_PARAM
-import com.twofasapp.prefs.model.OtpAuthLink.Companion.PERIOD_PARAM
+import com.twofasapp.parsers.domain.OtpAuthLink
+import com.twofasapp.parsers.domain.OtpAuthLink.Companion.ALGORITHM_PARAM
+import com.twofasapp.parsers.domain.OtpAuthLink.Companion.COUNTER
+import com.twofasapp.parsers.domain.OtpAuthLink.Companion.DIGITS_PARAM
+import com.twofasapp.parsers.domain.OtpAuthLink.Companion.PERIOD_PARAM
 import com.twofasapp.prefs.model.ServiceDto
 
 @Deprecated("Remove")

@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":core:locale"))
     implementation(project(":core:designsystem"))
     implementation(project(":data:services"))
+    implementation(project(":parsers"))
 
     implementation(libs.bundles.appCompat)
     implementation(libs.bundles.compose)

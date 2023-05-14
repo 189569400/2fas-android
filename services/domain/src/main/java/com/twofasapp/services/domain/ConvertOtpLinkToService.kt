@@ -2,7 +2,7 @@ package com.twofasapp.services.domain
 
 import com.twofasapp.parsers.ServiceParser
 import com.twofasapp.parsers.SupportedServices
-import com.twofasapp.prefs.model.OtpAuthLink
+import com.twofasapp.parsers.domain.OtpAuthLink
 import com.twofasapp.prefs.model.ServiceDto
 
 class ConvertOtpLinkToService {

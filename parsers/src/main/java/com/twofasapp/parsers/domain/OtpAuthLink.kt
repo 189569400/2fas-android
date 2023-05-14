@@ -1,4 +1,4 @@
-package com.twofasapp.prefs.model
+package com.twofasapp.parsers.domain
 
 data class OtpAuthLink(
     val type: String,

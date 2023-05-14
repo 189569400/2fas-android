@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":backup:domain"))
     implementation(project(":feature:qrscan"))
+    implementation(project(":parsers"))
 
     implementation(libs.bundles.compose)
     implementation(libs.bundles.viewModel)
