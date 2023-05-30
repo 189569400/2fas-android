@@ -65,13 +65,26 @@ internal class ServicesLocalSource(
         return recentlyAddedServiceFlow.filterNotNull()
     }
 
+    suspend fun insertService(service: Service): Long {
+        return dao.insert(service.asEntity())
+    }
+
     suspend fun getService(id: Long): Service {
         return dao.select(id).asDomain()
+    }
+
+    suspend fun getServiceBySecret(secret: String): Service? {
+        return dao.selectBySecret(secret)?.asDomain()
     }
 
     suspend fun deleteService(id: Long) {
         log("Delete service $id")
         dao.delete(id)
+    }
+
+    suspend fun deleteService(secret: String) {
+        log("Delete service")
+        return dao.deleteBySecret(secret)
     }
 
     suspend fun updateService(service: Service) {

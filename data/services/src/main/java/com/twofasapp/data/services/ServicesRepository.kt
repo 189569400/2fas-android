@@ -2,6 +2,7 @@ package com.twofasapp.data.services
 
 import com.twofasapp.data.services.domain.RecentlyAddedService
 import com.twofasapp.data.services.domain.Service
+import com.twofasapp.parsers.domain.OtpAuthLink
 import kotlinx.coroutines.flow.Flow
 
 interface ServicesRepository {
@@ -23,4 +24,5 @@ interface ServicesRepository {
     suspend fun recalculateTimeDelta()
     suspend fun isServiceExists(secret: String): Boolean
     suspend fun isSecretValid(secret: String): Boolean
+    suspend fun addService(link: OtpAuthLink): Long
 }

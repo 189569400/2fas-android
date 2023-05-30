@@ -53,7 +53,7 @@ internal fun AddServiceManualScreen(
     Column(
         modifier = Modifier
             .background(TwTheme.color.surface)
-            .offset(y = (-16).dp)
+            .offset(y = (-32).dp)
             .verticalScroll(rememberScrollState())
             .imePadding()
             .animateContentSize()

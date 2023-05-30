@@ -1,14 +1,15 @@
-package com.twofasapp.parsers
+package com.twofasapp.data.services.otp
 
+import com.twofasapp.data.services.domain.Service
 import com.twofasapp.di.BackupSyncStatus
-import com.twofasapp.parsers.domain.SupportedService
+import com.twofasapp.parsers.ServiceIcons
+import com.twofasapp.parsers.SupportedServices
 import com.twofasapp.parsers.domain.OtpAuthLink
-import com.twofasapp.prefs.model.ServiceDto
-import com.twofasapp.prefs.model.Tint
 
 object ServiceParser {
 
-    fun parseService(link: OtpAuthLink, supportedService: SupportedService?): ServiceDto {
+    fun parseService(link: OtpAuthLink): Service {
+        val supportedService = SupportedServices.list.firstOrNull { it.isMatching(link.issuer, link.label) }
         val issuer = link.issuer
 
         var name = supportedService?.name ?: ""
@@ -56,27 +57,36 @@ object ServiceParser {
 
         val iconCollectionId = supportedService?.iconCollection?.id ?: ServiceIcons.defaultCollectionId
 
-        return ServiceDto(
-            name = name.take(30),
-            secret = link.secret,
-            authType = ServiceDto.AuthType.valueOf(link.type.uppercase()),
-            otpLink = link.link,
-            otpLabel = link.label,
-            otpAccount = if (name == account) null else account?.take(50),
-            otpIssuer = issuer,
-            otpDigits = digits,
-            otpPeriod = period,
-            otpAlgorithm = parseSupportedAlgorithm(algorithm),
-            hotpCounter = counter,
-            backupSyncStatus = BackupSyncStatus.NOT_SYNCED,
-            updatedAt = 0,
-            assignedDomains = emptyList(),
+        return Service(
+            id = 0L,
             serviceTypeId = supportedService?.id,
-            selectedImageType = if (iconCollectionId == ServiceIcons.defaultCollectionId) ServiceDto.ImageType.Label else ServiceDto.ImageType.IconCollection,
+            secret = link.secret,
+            code = null,
+            name = if (name.isBlank()) "Unknown" else name.take(30),
+            info = if (name == account) null else account?.take(50),
+            authType = Service.AuthType.valueOf(link.type.uppercase()),
+            link = link.link,
+            issuer = issuer,
+            period = period,
+            digits = digits,
+            hotpCounter = counter,
+            hotpCounterTimestamp = null,
+            algorithm = parseSupportedAlgorithm(algorithm),
+            groupId = null,
+            imageType = if (iconCollectionId == ServiceIcons.defaultCollectionId) Service.ImageType.Label else Service.ImageType.IconCollection,
             iconCollectionId = iconCollectionId,
+            iconLight = ServiceIcons.getIcon(iconCollectionId, isDark = false),
+            iconDark = ServiceIcons.getIcon(iconCollectionId, isDark = true),
             labelText = if (iconCollectionId == ServiceIcons.defaultCollectionId) name.uppercase().take(2) else null,
-            labelBackgroundColor = if (iconCollectionId == ServiceIcons.defaultCollectionId) Tint.values().random() else null,
-            source = ServiceDto.Source.Link,
+            labelColor = if (iconCollectionId == ServiceIcons.defaultCollectionId) Service.Tint.values().random() else null,
+            badgeColor = null,
+            tags = supportedService?.tags.orEmpty(),
+            isDeleted = false,
+            updatedAt = System.currentTimeMillis(),
+            source = Service.Source.Link,
+            assignedDomains = listOf(),
+            backupSyncStatus = BackupSyncStatus.NOT_SYNCED
+
         )
     }
 
@@ -85,7 +95,7 @@ object ServiceParser {
 
         return when {
             labelPart2.isNullOrBlank().not() -> labelPart2
-            labelPart1.isNotBlank() && labelPart1.contains("@") -> labelPart1
+            labelPart1.isNotBlank() && labelPart1 != issuer -> labelPart1
             else -> null
         }
     }
@@ -101,14 +111,14 @@ object ServiceParser {
 
     private fun String.removeWhiteSpaces() = this.replace(" ", "")
 
-    private fun parseSupportedAlgorithm(otpAlgorithm: String?): String? =
+    private fun parseSupportedAlgorithm(otpAlgorithm: String?): Service.Algorithm? =
         when {
             otpAlgorithm == null -> null
-            otpAlgorithm.equals("SHA1", ignoreCase = true) -> "SHA1"
-            otpAlgorithm.equals("SHA224", ignoreCase = true) -> "SHA224"
-            otpAlgorithm.equals("SHA256", ignoreCase = true) -> "SHA256"
-            otpAlgorithm.equals("SHA384", ignoreCase = true) -> "SHA384"
-            otpAlgorithm.equals("SHA512", ignoreCase = true) -> "SHA512"
+            otpAlgorithm.equals("SHA1", ignoreCase = true) -> Service.Algorithm.SHA1
+            otpAlgorithm.equals("SHA224", ignoreCase = true) -> Service.Algorithm.SHA224
+            otpAlgorithm.equals("SHA256", ignoreCase = true) -> Service.Algorithm.SHA256
+            otpAlgorithm.equals("SHA384", ignoreCase = true) -> Service.Algorithm.SHA384
+            otpAlgorithm.equals("SHA512", ignoreCase = true) -> Service.Algorithm.SHA512
             else -> null
         }
 }

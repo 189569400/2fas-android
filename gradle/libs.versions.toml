@@ -25,6 +25,7 @@ material = "1.8.0"
 
 [libraries]
 appcompat = "androidx.appcompat:appcompat:1.6.1"
+activityX = "androidx.activity:activity-ktx:1.7.2"
 accompanistFlowLayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 accompanistPlaceholder = { module = "com.google.accompanist:accompanist-placeholder", version.ref = "accompanist" }
 accompanistSystemUi = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }

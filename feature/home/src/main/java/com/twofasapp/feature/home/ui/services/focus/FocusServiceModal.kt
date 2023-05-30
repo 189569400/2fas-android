@@ -1,4 +1,4 @@
-package com.twofasapp.feature.home.ui.services.modal
+package com.twofasapp.feature.home.ui.services.focus
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

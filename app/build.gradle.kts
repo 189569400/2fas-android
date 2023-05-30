@@ -88,6 +88,7 @@ dependencies {
     implementation(libs.coroutinesToRx)
     implementation(libs.workManager)
     implementation(libs.workManagerRx)
+    implementation(libs.activityX)
 
     implementation(libs.coreSplash)
 

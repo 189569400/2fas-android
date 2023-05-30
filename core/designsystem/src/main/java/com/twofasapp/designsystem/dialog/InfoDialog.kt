@@ -7,13 +7,13 @@ import androidx.compose.ui.window.DialogProperties
 import com.twofasapp.locale.TwLocale
 
 @Composable
-fun ConfirmDialog(
+fun InfoDialog(
     onDismissRequest: () -> Unit,
     title: String? = null,
     body: String? = null,
     bodyAnnotated: AnnotatedString? = null,
-    positive: String? = TwLocale.strings.commonYes,
-    negative: String? = TwLocale.strings.commonNo,
+    positive: String? = TwLocale.strings.commonOk,
+    negative: String? = null,
     onPositive: () -> Unit = {},
     onNegative: () -> Unit = {},
     properties: DialogProperties = DialogProperties(),
@@ -34,7 +34,7 @@ fun ConfirmDialog(
 @Preview
 @Composable
 private fun Preview() {
-    ConfirmDialog(
+    InfoDialog(
         onDismissRequest = { },
         title = "Confirm?",
         body = TwLocale.strings.placeholderLong,

@@ -9,7 +9,9 @@ import com.twofasapp.data.services.domain.RecentlyAddedService
 import com.twofasapp.data.services.domain.Service
 import com.twofasapp.data.services.local.ServicesLocalSource
 import com.twofasapp.data.services.otp.ServiceCodeGenerator
+import com.twofasapp.data.services.otp.ServiceParser
 import com.twofasapp.di.BackupSyncStatus
+import com.twofasapp.parsers.domain.OtpAuthLink
 import com.twofasapp.prefs.model.RecentlyDeletedService
 import com.twofasapp.prefs.model.RemoteBackupStatus
 import com.twofasapp.prefs.usecase.RecentlyDeletedPreference
@@ -188,5 +190,26 @@ internal class ServicesRepositoryImpl(
 
     override suspend fun isSecretValid(secret: String): Boolean {
         return codeGenerator.check(secret)
+    }
+
+    override suspend fun addService(link: OtpAuthLink): Long {
+        return withContext(dispatchers.io) {
+            val service = ServiceParser.parseService(link)
+
+            // Delete duplicate, if any
+            val existingService = local.getServiceBySecret(service.secret)
+            existingService?.let {
+                local.deleteService(it.secret)
+                local.deleteServiceFromOrder(it.id)
+            }
+
+            // Insert
+            val id = local.insertService(service)
+            local.addServiceToOrder(id)
+
+            syncBackupDispatcher.tryDispatch(SyncBackupTrigger.SERVICES_CHANGED)
+
+            id
+        }
     }
 }

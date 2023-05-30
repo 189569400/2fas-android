@@ -1,4 +1,4 @@
-package com.twofasapp.feature.home.ui.services.modal
+package com.twofasapp.feature.home.ui.services
 
 internal sealed interface ModalType {
     object Empty : ModalType

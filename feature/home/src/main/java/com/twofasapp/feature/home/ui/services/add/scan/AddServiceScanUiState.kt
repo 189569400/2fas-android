@@ -5,4 +5,10 @@ internal data class AddServiceScanUiState(
     val enabled: Boolean = true,
     val showInvalidQrDialog: Boolean = false,
     val showServiceExistsDialog: Boolean = false,
+    val showErrorDialog: Boolean = false,
+    val showGalleryErrorDialog: Boolean = false,
 )
+
+internal sealed interface AddServiceScanUiEvent {
+    data class AddedSuccessfully(val serviceId: Long) : AddServiceScanUiEvent
+}

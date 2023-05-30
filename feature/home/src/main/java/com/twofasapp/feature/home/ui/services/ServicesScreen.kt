@@ -73,8 +73,7 @@ import com.twofasapp.feature.home.ui.services.component.ServicesFab
 import com.twofasapp.feature.home.ui.services.component.ServicesProgress
 import com.twofasapp.feature.home.ui.services.component.SyncNoticeBar
 import com.twofasapp.feature.home.ui.services.component.SyncReminder
-import com.twofasapp.feature.home.ui.services.modal.FocusServiceModal
-import com.twofasapp.feature.home.ui.services.modal.ModalType
+import com.twofasapp.feature.home.ui.services.focus.FocusServiceModal
 import com.twofasapp.locale.TwLocale
 import kotlinx.coroutines.android.awaitFrame
 import kotlinx.coroutines.delay
@@ -568,7 +567,7 @@ private fun ServicesScreen(
             onDismissRequest = { showDeleteGroupDialog = false },
             title = TwLocale.strings.commonDelete,
             body = TwLocale.strings.groupsDelete,
-            onConfirm = { onDeleteGroup(clickedGroup?.id.orEmpty()) },
+            onPositive = { onDeleteGroup(clickedGroup?.id.orEmpty()) },
         )
     }
 
